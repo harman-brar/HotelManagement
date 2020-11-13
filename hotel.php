@@ -1,20 +1,11 @@
-<!--Test Oracle file for UBC CPSC304 2018 Winter Term 1
-  Created by Jiemin Zhang
-  Modified by Simona Radu
-  Modified by Jessica Wong (2018-06-22)
-  This file shows the very basics of how to execute PHP commands
-  on Oracle.  
-  Specifically, it will drop a table, create a table, insert values
-  update values, and then query for values
- 
-  IF YOU HAVE A TABLE CALLED "demoTable" IT WILL BE DESTROYED
-
+<!--
   The script assumes you already have a server set up
   All OCI commands are commands to the Oracle libraries
   To get the file to work, you must place it somewhere where your
   Apache server can run it, and you must rename it to have a ".php"
   extension.  You must also change the username and password on the 
-  OCILogon below to be your ORACLE username and password -->
+  OCILogon below to be your ORACLE username and password 
+-->
 
   <!-- run at https://www.students.cs.ubc.ca/~hb4/hotel.php -->
   
@@ -161,7 +152,7 @@
             <hr />
 
             <h2>Division Query</h2>
-            <p>Which guests watched the same performances as guest X?</p>
+            <p>Which guests watched all of the performances?</p>
             <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
                 New value: <input type="text" name="tableName"> <br /><br />
