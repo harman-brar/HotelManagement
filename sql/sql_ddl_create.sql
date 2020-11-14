@@ -11,7 +11,7 @@ CREATE TABLE Hotel(
   Name VARCHAR(255),
   Address VARCHAR(320),
   Phone VARCHAR(10),
-  CONSTRAINT unique_phone UNIQUE(Phone)
+  CONSTRAINT unique_phone UNIQUE(Phone),
   CONSTRAINT hotel_pk PRIMARY KEY (HotelId)
 );
 
@@ -85,11 +85,11 @@ CREATE TABLE PerformanceGroup(
 );
   
 CREATE TABLE Performance(
-  PID,
+  PID INT,
   PGID INT NOT NULL,
   PerformanceDate DATE,
   Attendance INT,
-  CONSTRAINT unique_pgid UNIQUE(PGID)
+  CONSTRAINT unique_pgid UNIQUE(PGID),
   CONSTRAINT perf_pg_fk FOREIGN KEY (PGID) REFERENCES PerformanceGroup(PGID),
   CONSTRAINT perf_pk PRIMARY KEY(PID)
 );
@@ -141,7 +141,7 @@ CREATE TABLE Restaurant(
   RestaurantName VARCHAR(255),
   GroupId INT Not NULL,
   MaxCapacity INT,
-  CONSTRAINT unique_groupid_res UNIQUE(GroupId)
+  CONSTRAINT unique_groupid_res UNIQUE(GroupId),
   CONSTRAINT res_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE,
   CONSTRAINT res_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId),
   CONSTRAINT res_pk PRIMARY KEY (HotelId, RestaurantName)
@@ -171,7 +171,7 @@ CREATE TABLE Pool(
   PoolName VARCHAR(255),
   GroupId INT Not NULL,
   IsDrained INT,
-  CONSTRAINT unique_groupid_pool UNIQUE(GroupId)
+  CONSTRAINT unique_groupid_pool UNIQUE(GroupId),
   CONSTRAINT pool_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE,
   CONSTRAINT pool_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId),
   CONSTRAINT pool_pk PRIMARY KEY (HotelId, PoolName)
@@ -191,7 +191,7 @@ CREATE TABLE Gym(
   GymName VARCHAR(255),
   GroupId INT Not NULL,
   MaxCapacity INT,
-  CONSTRAINT unique_groupid_gym UNIQUE(GroupId)
+  CONSTRAINT unique_groupid_gym UNIQUE(GroupId),
   CONSTRAINT gym_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE,
   CONSTRAINT gmy_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId),
   CONSTRAINT gym_pk PRIMARY KEY (HotelId, GymName)
@@ -210,9 +210,9 @@ CREATE TABLE WorksOutAt(
 CREATE TABLE Spa(
   HotelId INT,
   SpaName VARCHAR(255),
-  GroupId INT Not NULL UNIQUE,
+  GroupId INT Not NULL,
   MaxCapacity INT,
-  CONSTRAINT unique_groupid_spa UNIQUE(GroupId)
+  CONSTRAINT unique_groupid_spa UNIQUE(GroupId),
   CONSTRAINT spa_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE,
   CONSTRAINT spa_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId),
   CONSTRAINT spa_pk PRIMARY KEY (HotelId, SpaName)
