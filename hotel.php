@@ -67,7 +67,7 @@
             <hr>
             <h2>Create All Required Tables</h2>
 
-            <form method="POST" action="hotel.php">
+            <form method="POST" action="hotel.php#pageEnd">
                 <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
                 <input type="hidden" id="createTablesRequest" name="createTablesRequest">
                 <p><input type="submit" class="btn btn-dark btn-lg" value="Go" name="reset"></p>
@@ -76,7 +76,7 @@
             <hr />
 
             <h2>Populate Tables With Mock Data</h2>
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
                 Number: <input type="text" name="insNo"> <br /><br />
                 Name: <input type="text" name="insName"> <br /><br />
@@ -86,10 +86,20 @@
 
             <hr />
 
+            <h2>Drop All Tables</h2>
+
+            <form method="POST" action="hotel.php#pageEnd">
+                <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
+                <input type="hidden" id="deleteTablesRequest" name="deleteTablesRequest">
+                <p><input type="submit" class="btn btn-dark btn-lg" value="Go" name="reset"></p>
+            </form>
+
+            <hr />
+
             <h2>Get Contents of a Specific Table</h2>
             <p>Check legend for table names</p>
 
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
                 Table Name: <input type="text" name="tableName"> <br /><br />
 
@@ -100,7 +110,7 @@
 
             <h2>Insert Query</h2>
             <p>Create a Hotel</p>
-            <form method="GET" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="countTupleRequest" name="countTupleRequest">
                 Id: <input type="text" name="insNo"> <br /><br />
                 Name: <input type="text" name="insNo"> <br /><br />
@@ -113,7 +123,7 @@
 
             <h2>Update Query</h2>
             <p>Set the suite isInUse to false after the guest leaves.</p>
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
                 Hotel Id: <input type="text" name="tableName"> <br /><br />
                 Suite number: <input type="text" name="tableName"> <br /><br />
@@ -126,7 +136,7 @@
 
             <h2>Delete Query</h2>
             <p>Delete pool with poolName in hotel X</p>
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
                 Hotel Id: <input type="text" name="tableName"> <br /><br />
                 Pool name: <input type="text" name="tableName"> <br /><br />
@@ -138,7 +148,7 @@
 
             <h2>Projection Query</h2>
             <p>Get the name, email, and phone no. for guest with id.</p>
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
                 Id: <input type="text" name="tableName"> <br /><br />
 
@@ -149,7 +159,7 @@
 
             <h2>Selection Query</h2>
             <p>What is the phone # of the guest with email?</p>
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
                 Email: <input type="text" name="tableName"> <br /><br />
 
@@ -160,7 +170,7 @@
 
             <h2>Division Query</h2>
             <p>Which guests watched all of the performances?</p>
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
@@ -171,13 +181,15 @@
             <h2>Join Query</h2>
             <p>Which gyms did the guest with Id work out in and what is the max capacity of these
 gyms?</p>
-            <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
                 Id: <input type="text" name="tableName"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
             </form>
         </div>
+
+        <div id="pageEnd"></div>
 
         <?php
 		//this tells the system that it's no longer just parsing html; it's now parsing PHP
@@ -271,7 +283,7 @@ gyms?</p>
 
             // Your username is ora_(CWL_ID) and the password is a(student number). For example, 
 			// ora_platypus is the username and a12345678 is the password.
-            $db_conn = OCILogon("ora_", "", "dbhost.students.cs.ubc.ca:1522/stu");
+            $db_conn = OCILogon("ora_hb4", "a70958632", "dbhost.students.cs.ubc.ca:1522/stu");
 
             if ($db_conn) {
                 debugAlertMessage("Database is Connected");
@@ -302,14 +314,146 @@ gyms?</p>
             OCICommit($db_conn);
         }
 
-        function handleResetRequest() {
+        function handleDropRequest() {
             global $db_conn;
-            // Drop old table
-            executePlainSQL("DROP TABLE demoTable");
+            
+            executePlainSQL("DROP TABLE TreatmentPricing");
+            echo "Dropped TreatmentPricing Table <br>";
+            
+            executePlainSQL("DROP TABLE RelaxesIn");
+            echo "Dropped RelaxesIn Table <br>";
 
-            // Create new table
-            echo "<br> creating new table <br>";
-            executePlainSQL("CREATE TABLE demoTable (id int PRIMARY KEY, name char(30))");
+            executePlainSQL("DROP TABLE Spa");
+            echo "Dropped Spa Table <br>";
+
+            executePlainSQL("DROP TABLE WorksOutAt");
+            echo "Dropped WorksOutAt Table <br>";
+
+            executePlainSQL("DROP TABLE Gym");
+            echo "Dropped Gym Table <br>";
+
+            executePlainSQL("DROP TABLE SwimsAt");
+            echo "Dropped SwimsAt Table <br>";
+
+            executePlainSQL("DROP TABLE Pool");
+            echo "Dropped Pool Table <br>";
+
+            executePlainSQL("DROP TABLE MenuItemPrices");
+            echo "Dropped MenuItemPrices Table <br>";
+
+            executePlainSQL("DROP TABLE EatsAt");
+            echo "Dropped EatsAt Table <br>";
+
+            executePlainSQL("DROP TABLE Restaurant");
+            echo "Dropped Restaurant Table <br>";
+
+            executePlainSQL("DROP TABLE Assigns");
+            echo "Dropped Assigns Table <br>";
+
+            executePlainSQL("DROP TABLE OperatorGroup");
+            echo "Dropped OperatorGroup Table <br>";
+
+            executePlainSQL("DROP TABLE FacilityEmployee");
+            echo "Dropped FacilityEmployee Table <br>";
+
+            executePlainSQL("DROP TABLE Employee");
+            echo "Dropped Employee Table <br>";
+
+            executePlainSQL("DROP TABLE Watches");
+            echo "Dropped Watches Table <br>";
+
+            executePlainSQL("DROP TABLE Performance");
+            echo "Dropped Performance Table <br>";
+            
+            executePlainSQL("DROP TABLE PerformanceGroup");
+            echo "Dropped PerformanceGroup Table <br>";
+            
+            executePlainSQL("DROP TABLE Hires");
+            echo "Dropped Hires Table <br>";
+
+            executePlainSQL("DROP TABLE PayrollGroup");
+            echo "Dropped PayrollGroup Table <br>";
+
+            executePlainSQL("DROP TABLE Business");
+            echo "Dropped Business Table <br>";
+
+            executePlainSQL("DROP TABLE Deluxe");
+            echo "Dropped Deluxe Table <br>";
+
+            executePlainSQL("DROP TABLE Standard");
+            echo "Dropped Standard Table <br>";
+
+            executePlainSQL("DROP TABLE Books");
+            echo "Dropped Books Table <br>";
+
+            executePlainSQL("DROP TABLE Suite");
+            echo "Dropped Suite Table <br>";
+
+            executePlainSQL("DROP TABLE Hotel");
+            echo "Dropped Hotel Table <br>";
+
+            executePlainSQL("DROP TABLE Guest");
+            echo "Dropped Guest Table <br>";
+
+            OCICommit($db_conn);
+        }
+
+        function handleCreateRequest() {
+            global $db_conn;
+
+            executePlainSQL("CREATE TABLE Guest(UserId INT, Name VARCHAR(255), Email VARCHAR(254), Phone VARCHAR(10), CONSTRAINT guest_pk PRIMARY KEY (UserId))");
+            echo "Created Guest Table <br>";
+            executePlainSQL("CREATE TABLE Hotel( HotelId INT, Name VARCHAR(255), Address VARCHAR(320), Phone VARCHAR(10), CONSTRAINT unique_phone UNIQUE(Phone), CONSTRAINT hotel_pk PRIMARY KEY (HotelId))");
+            echo "Created Hotel Table <br>";
+            executePlainSQL("CREATE TABLE Suite( HotelId INT, SuiteNo INT, IsInUse INT, BedCount INT, IsClean INT, CONSTRAINT suite_hotel FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE, CONSTRAINT suite_pk PRIMARY KEY (HotelId, SuiteNo))");
+            echo "Created Suite Table <br>";
+            executePlainSQL("CREATE TABLE Books( UserId INT, HotelId INT, SuiteNo INT, BookingDate DATE, StayLength INT, Price INT, CONSTRAINT books_guest FOREIGN KEY (UserId) REFERENCES Guest(UserId), CONSTRAINT books_suite FOREIGN KEY (HotelId, SuiteNo) REFERENCES Suite(HotelId, SuiteNo), CONSTRAINT books_pk PRIMARY KEY (UserId, HotelId, SuiteNo))");
+            echo "Created Books Table <br>";
+            executePlainSQL("CREATE TABLE Standard( HotelId INT, SuiteNo INT, HasSofaBed INT, CONSTRAINT standard_suite FOREIGN KEY (HotelId, SuiteNo) REFERENCES Suite(HotelId, SuiteNo), CONSTRAINT standard_pk PRIMARY KEY(HotelId, SuiteNo))");
+            echo "Created Standard Table <br>";
+            executePlainSQL("CREATE TABLE Deluxe( HotelId INT, SuiteNo INT, NoOfRooms INT, CONSTRAINT deluxe_suite FOREIGN KEY (HotelId, SuiteNo) REFERENCES Suite(HotelId, SuiteNo), CONSTRAINT deluxe_pk PRIMARY KEY(HotelId, SuiteNo))");
+            echo "Created Deluxe Table <br>";
+            executePlainSQL("CREATE TABLE Business( HotelId INT, SuiteNo INT, HasLivingRoom INT, CONSTRAINT business_suite FOREIGN KEY (HotelId, SuiteNo) REFERENCES Suite(HotelId, SuiteNo), CONSTRAINT business_pk PRIMARY KEY(HotelId, SuiteNo))");
+            echo "Created Business Table <br>";
+            executePlainSQL("CREATE TABLE PayrollGroup( PGID Int, Name VARCHAR(255), CONSTRAINT pg_pk PRIMARY KEY(PGID))");
+            echo "Created PayrollGroup Table <br>";
+            executePlainSQL("CREATE TABLE Hires( HotelId INT, PGID Int, CONSTRAINT hiring_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE, CONSTRAINT ph_hired_fk FOREIGN KEY (PGID) REFERENCES PayrollGroup(PGID), CONSTRAINT hires_pk PRIMARY KEY(HotelId, PGID))");
+            echo "Created Hires Table <br>";
+            executePlainSQL("CREATE TABLE PerformanceGroup( PGID Int, ContractStartDate DATE, ContractEndDate DATE, ChargeRate INT, CONSTRAINT pg_fk FOREIGN KEY (PGID) REFERENCES PayrollGroup(PGID) ON DELETE CASCADE, CONSTRAINT pf_pk PRIMARY KEY (PGID))");
+            echo "Created PerformanceGroup Table <br>";
+            executePlainSQL("CREATE TABLE Performance( PID INT, PGID INT NOT NULL, PerformanceDate DATE, Attendance INT, CONSTRAINT unique_pgid UNIQUE(PGID), CONSTRAINT perf_pg_fk FOREIGN KEY (PGID) REFERENCES PerformanceGroup(PGID), CONSTRAINT perf_pk PRIMARY KEY(PID))");
+            echo "Created Performance Table <br>";
+            executePlainSQL("CREATE TABLE Watches( UserId INT, PID Int, CONSTRAINT watches_guest_fk FOREIGN KEY (UserId) REFERENCES Guest(UserId), CONSTRAINT watches_perf_fk FOREIGN KEY (PID) REFERENCES Performance(PID), CONSTRAINT watches_pk PRIMARY KEY(UserId, PID))");
+            echo "Created Watches Table <br>";
+            executePlainSQL("CREATE TABLE Employee( PGID INT, StartDate DATE, Salary INT, JobDescription VARCHAR(1000), IsCurrentlyEmployed INT, EndDate DATE, CONSTRAINT empl_pg_fk FOREIGN KEY (PGID) REFERENCES PayrollGroup(PGID) ON DELETE CASCADE, CONSTRAINT employee_pk PRIMARY KEY (PGID))");
+            echo "Created Employee Table <br>";
+            executePlainSQL("CREATE TABLE FacilityEmployee( PGID Int, StartDate DATE, Salary INT, CONSTRAINT f_empl_pg_fk FOREIGN KEY (PGID) REFERENCES PayrollGroup(PGID) ON DELETE CASCADE, CONSTRAINT f_empl_pk PRIMARY KEY (PGID))");
+            echo "Created FacilityEmployee Table <br>";
+            executePlainSQL("CREATE TABLE OperatorGroup( GroupId Int, MemberCount INT, CONSTRAINT og_pk PRIMARY KEY (GroupId))");
+            echo "Created OperatorGroup Table <br>";
+            executePlainSQL("CREATE TABLE Assigns( GroupId Int, PGID Int, AssignmentDate DATE, CONSTRAINT assigns_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId) ON DELETE CASCADE, CONSTRAINT assigns_pg_fk FOREIGN KEY (PGID) REFERENCES PayrollGroup(PGID), CONSTRAINT assigns_pk PRIMARY KEY (GroupId, PGID))");
+            echo "Created Assigns Table <br>";
+            executePlainSQL("CREATE TABLE Restaurant( HotelId INT, RestaurantName VARCHAR(255), GroupId INT Not NULL, MaxCapacity INT, CONSTRAINT unique_groupid_res UNIQUE(GroupId), CONSTRAINT res_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE, CONSTRAINT res_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId), CONSTRAINT res_pk PRIMARY KEY (HotelId, RestaurantName))");
+            echo "Created Restaurant Table <br>";
+            executePlainSQL("CREATE TABLE EatsAt( UserId INT, HotelId INT, RestaurantName VARCHAR(255), MenuItem VARCHAR(100), CONSTRAINT ea_guest_fk FOREIGN KEY (UserId) REFERENCES Guest(UserId), CONSTRAINT ea_res_fk FOREIGN KEY (HotelId, RestaurantName) REFERENCES Restaurant(HotelId, RestaurantName) ON DELETE CASCADE, CONSTRAINT ea_pk PRIMARY KEY (UserId, HotelId, RestaurantName))");
+            echo "Created EatsAt Table <br>";
+            executePlainSQL("CREATE TABLE MenuItemPrices( HotelId INT, RestaurantName VARCHAR(255), MenuItem VARCHAR(255), Price INT, CONSTRAINT mip_res_fk FOREIGN KEY (HotelId, RestaurantName) REFERENCES Restaurant(HotelId, RestaurantName) ON DELETE CASCADE, CONSTRAINT mip_pk PRIMARY KEY (HotelId, RestaurantName, MenuItem))");
+            echo "Created MenuItemPrices Table <br>";
+            executePlainSQL("CREATE TABLE Pool( HotelId INT, PoolName VARCHAR(255), GroupId INT Not NULL, IsDrained INT, CONSTRAINT unique_groupid_pool UNIQUE(GroupId), CONSTRAINT pool_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE, CONSTRAINT pool_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId), CONSTRAINT pool_pk PRIMARY KEY (HotelId, PoolName))");
+            echo "Created Pool Table <br>";
+            executePlainSQL("CREATE TABLE SwimsAt( UserId INT, HotelId INT, PoolName VARCHAR(255), CONSTRAINT sa_guest_fk FOREIGN KEY (UserId) REFERENCES Guest(UserId), CONSTRAINT sa_pool_fk FOREIGN KEY (HotelId, PoolName) REFERENCES Pool(HotelId, PoolName) ON DELETE CASCADE, CONSTRAINT sa_pk PRIMARY KEY (UserId, HotelId, PoolName))");
+            echo "Created SwimsAt Table <br>";
+            executePlainSQL("CREATE TABLE Gym( HotelId INT, GymName VARCHAR(255), GroupId INT Not NULL, MaxCapacity INT, CONSTRAINT unique_groupid_gym UNIQUE(GroupId), CONSTRAINT gym_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE, CONSTRAINT gmy_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId), CONSTRAINT gym_pk PRIMARY KEY (HotelId, GymName))");
+            echo "Created Gym Table <br>";
+            executePlainSQL("CREATE TABLE WorksOutAt( UserId INT, HotelId INT, GymName VARCHAR(255), MaxCapacity INT, CONSTRAINT woa_guest_fk FOREIGN KEY (UserId) REFERENCES Guest(UserId), CONSTRAINT woa_gym_fk FOREIGN KEY (HotelId, GymName) REFERENCES Gym(HotelId, GymName) ON DELETE CASCADE, CONSTRAINT woa_pk PRIMARY KEY (UserId, HotelId, GymName))");
+            echo "Created WorksOutAt Table <br>";
+            executePlainSQL("CREATE TABLE Spa( HotelId INT, SpaName VARCHAR(255), GroupId INT Not NULL, MaxCapacity INT, CONSTRAINT unique_groupid_spa UNIQUE(GroupId), CONSTRAINT spa_hotel_fk FOREIGN KEY (HotelId) REFERENCES Hotel(HotelId) ON DELETE CASCADE, CONSTRAINT spa_og_fk FOREIGN KEY (GroupId) REFERENCES OperatorGroup(GroupId), CONSTRAINT spa_pk PRIMARY KEY (HotelId, SpaName))");
+            echo "Created Spa Table <br>";
+            executePlainSQL("CREATE TABLE RelaxesIn( UserId INT, HotelId INT, SpaName VARCHAR(255), TreatmentRating INT, CONSTRAINT ri_guest_fk FOREIGN KEY (UserId) REFERENCES Guest(UserId), CONSTRAINT ri_spa_fk FOREIGN KEY (HotelId, SpaName) REFERENCES Spa(HotelId, SpaName) ON DELETE CASCADE, CONSTRAINT ri_pk PRIMARY KEY (UserId, HotelId, SpaName))");
+            echo "Created RelaxesIn Table <br>";
+            executePlainSQL("CREATE TABLE TreatmentPricing( HotelId INT, SpaName VARCHAR(255), TreatmentRating INT, Price INT, CONSTRAINT tp_spa_fk FOREIGN KEY (HotelId, SpaName) REFERENCES Spa(HotelId, SpaName) ON DELETE CASCADE, CONSTRAINT tp_pk PRIMARY KEY (HotelId, SpaName, TreatmentRating))");
+            echo "Created TreatmentPricing Table <br>";
+
             OCICommit($db_conn);
         }
 
@@ -360,8 +504,10 @@ gyms?</p>
 	// A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
         function handlePOSTRequest() {
             if (connectToDB()) {
-                if (array_key_exists('resetTablesRequest', $_POST)) {
-                    handleResetRequest();
+                if (array_key_exists('createTablesRequest', $_POST)) {
+                    handleCreateRequest();
+                } else if (array_key_exists('deleteTablesRequest', $_POST)) {
+                    handleDropRequest();
                 } else if (array_key_exists('updateQueryRequest', $_POST)) {
                     handleUpdateRequest();
                 } else if (array_key_exists('insertQueryRequest', $_POST)) {
