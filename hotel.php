@@ -99,9 +99,13 @@
             <hr />
 
             <h2>Insert Query</h2>
-            <p>Create a booking for Guest X at Hotel Y for Suite # N</p>
+            <p>Create a Hotel</p>
             <form method="GET" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="countTupleRequest" name="countTupleRequest">
+                Id: <input type="text" name="insNo"> <br /><br />
+                Name: <input type="text" name="insNo"> <br /><br />
+                Address: <input type="text" name="insNo"> <br /><br />
+                Phone: <input type="text" name="insNo"> <br /><br />
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="countTuples"></p>
             </form>
 
@@ -111,7 +115,9 @@
             <p>Set the suite isInUse to false after the guest leaves.</p>
             <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                New value: <input type="text" name="tableName"> <br /><br />
+                Hotel Id: <input type="text" name="tableName"> <br /><br />
+                Suite number: <input type="text" name="tableName"> <br /><br />
+                Is in use?: <input type="text" name="tableName" placeholder="true/false"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
             </form>
@@ -122,7 +128,8 @@
             <p>Delete pool with poolName in hotel X</p>
             <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                New value: <input type="text" name="tableName"> <br /><br />
+                Hotel Id: <input type="text" name="tableName"> <br /><br />
+                Pool name: <input type="text" name="tableName"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
             </form>
@@ -130,10 +137,10 @@
             <hr />
 
             <h2>Projection Query</h2>
-            <p>Get the name, email, and phone no. for guest X.</p>
+            <p>Get the name, email, and phone no. for guest with id.</p>
             <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                New value: <input type="text" name="tableName"> <br /><br />
+                Id: <input type="text" name="tableName"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
             </form>
@@ -141,10 +148,10 @@
             <hr />
 
             <h2>Selection Query</h2>
-            <p>What is the phone # of the guest with email E?</p>
+            <p>What is the phone # of the guest with email?</p>
             <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                New value: <input type="text" name="tableName"> <br /><br />
+                Email: <input type="text" name="tableName"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
             </form>
@@ -155,7 +162,6 @@
             <p>Which guests watched all of the performances?</p>
             <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                New value: <input type="text" name="tableName"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
             </form>
@@ -163,11 +169,11 @@
             <hr />
 
             <h2>Join Query</h2>
-            <p>Which gyms did the guest X work out in and what is the max capacity of these
+            <p>Which gyms did the guest with Id work out in and what is the max capacity of these
 gyms?</p>
             <form method="POST" action="hotel.php"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                New value: <input type="text" name="tableName"> <br /><br />
+                Id: <input type="text" name="tableName"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
             </form>
