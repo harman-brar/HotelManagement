@@ -29,7 +29,7 @@ CREATE TABLE Books(
   UserId INT,
   HotelId INT,
   SuiteNo INT,
-  BookingDate INT,
+  BookingDate Date,
   StayLength INT,
   Price INT,
   CONSTRAINT books_guest FOREIGN KEY (UserId) REFERENCES Guest(UserId),
