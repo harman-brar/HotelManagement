@@ -28,7 +28,7 @@ WHERE NOT EXISTS(
 		FROM Performance EXCEPT(	
 					SELECT W.PID
 					FROM Watches
-					WHERE W.UserId = G.UserId)));
+					WHERE W.UserId = G.UserId));
 
 /* Aggregation with Group By */
 SELECT H.HotelId, H.Name, Min(MaxCapacity)
