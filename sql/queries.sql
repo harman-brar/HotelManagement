@@ -28,4 +28,25 @@ WHERE NOT EXISTS(
 		FROM Performance EXCEPT(	
 					SELECT W.PID
 					FROM Watches
-					WHERE W.UserId = G.UserId))) 
+					WHERE W.UserId = G.UserId)));
+
+/* Aggregation with Group By */
+SELECT H.HotelId, H.Name, Min(MaxCapacity)
+FROM Hotel H, Gym G
+WHERE H.HotelId = G.HotelId
+GROUP BY H.HotelId, H.Name;
+
+/* Aggregation with Having */
+SELECT HotelId, Min(MaxCapacity)
+FROM GYM
+GROUP BY HotelId
+HAVING Min(MaxCapacity) > 20;
+
+/ *Nested Aggregation with Group By */
+SELECT HotelId
+FROM Hotel H
+GROUP BY HotelId
+HAVING 1 > (SELECT COUNT(*)
+            FROM Books B
+            WHERE H.HotelId = B.HotelId);
+ 
