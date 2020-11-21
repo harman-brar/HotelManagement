@@ -96,27 +96,15 @@
 
             <hr />
 
-            <h2>Get Contents of a Specific Table</h2>
-            <p>Check legend for table names</p>
-
-            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
-                <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                Table Name: <input type="text" name="tableName"> <br /><br />
-
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
-            </form>
-
-            <hr />
-
             <h2>Insert Query</h2>
-            <p>Create a Hotel</p>
-            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
-                <input type="hidden" id="countTupleRequest" name="countTupleRequest">
-                Id: <input type="text" name="insNo"> <br /><br />
-                Name: <input type="text" name="insNo"> <br /><br />
-                Address: <input type="text" name="insNo"> <br /><br />
-                Phone: <input type="text" name="insNo"> <br /><br />
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="countTuples"></p>
+            <p>Create a Hotel (with id > 4)</p>
+            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="insertRequest" name="insertRequest">
+                Id: <input type="text" name="hotelId"> <br /><br />
+                Name: <input type="text" name="name"> <br /><br />
+                Address: <input type="text" name="address"> <br /><br />
+                Phone: <input type="text" name="phone"> <br /><br />
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="insertSubmit"></p>
             </form>
 
             <hr />
@@ -125,11 +113,11 @@
             <p>Set the suite isInUse to false after the guest leaves.</p>
             <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                Hotel Id: <input type="text" name="tableName"> <br /><br />
-                Suite number: <input type="text" name="tableName"> <br /><br />
-                Is in use?: <input type="text" name="tableName" placeholder="true/false"> <br /><br />
+                Hotel Id: <input type="text" name="hotelId"> <br /><br />
+                Suite number: <input type="text" name="suiteNo"> <br /><br />
+                Is in use?: <input type="text" name="isInUse" placeholder="0 (false) | 1 (true)"> <br /><br />
 
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateQueryRequest"></p>
             </form>
 
             <hr />
@@ -137,43 +125,41 @@
             <h2>Delete Query</h2>
             <p>Delete pool with poolName in hotel X</p>
             <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
-                <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                Hotel Id: <input type="text" name="tableName"> <br /><br />
-                Pool name: <input type="text" name="tableName"> <br /><br />
+                <input type="hidden" id="deleteQueryRequest" name="deleteQueryRequest">
+                Hotel Id: <input type="text" name="hotelId"> <br /><br />
+                Pool name: <input type="text" name="poolName"> <br /><br />
 
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="deleteQueryRequest"></p>
             </form>
 
             <hr />
 
             <h2>Projection Query</h2>
-            <p>Get the name, email, and phone no. for guest with id.</p>
-            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
-                <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                Id: <input type="text" name="tableName"> <br /><br />
-
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
+            <p>Get the name, email, and phone no. of guests.</p>
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="projectionRequest" name="projectionRequest">
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="projectionRequest"></p>
             </form>
 
             <hr />
 
             <h2>Selection Query</h2>
             <p>What is the phone # of the guest with email?</p>
-            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
-                <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                Email: <input type="text" name="tableName"> <br /><br />
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="selectRequest" name="selectRequest">
+                Email: <input type="text" name="guestEmail"> <br /><br />
 
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="selectRequest"></p>
             </form>
 
             <hr />
 
             <h2>Division Query</h2>
             <p>Which guests watched all of the performances?</p>
-            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
-                <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="divisionRequest" name="divisionRequest">
 
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="divisionRequest"></p>
             </form>
 
             <hr />
@@ -181,12 +167,40 @@
             <h2>Join Query</h2>
             <p>Which gyms did the guest with Id work out in and what is the max capacity of these
 gyms?</p>
-            <form method="POST" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
-                <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-                Id: <input type="text" name="tableName"> <br /><br />
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="joinRequest" name="joinRequest">
+                Id: <input type="text" name="guestId"> <br /><br />
 
-                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="updateSubmit"></p>
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="joinRequest"></p>
             </form>
+
+            <hr />
+
+            <h2>Aggregation with Group By</h2>
+            <p>Group by HotelId, GymName</p>
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="agg1Request" name="agg1Request">
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="agg1Request"></p>
+            </form>
+
+            <hr />
+
+            <h2>Aggregation with Having</h2>
+            <p>Get HotelIds for Hotels that have a minimum gym max capacity of 21</p>
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="agg2Request" name="agg2Request">
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="agg2Request"></p>
+            </form>
+
+            <hr />
+
+            <h2>Nested Aggregation</h2>
+            <p>Group by HotelId, GymName</p>
+            <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
+                <input type="hidden" id="agg3Request" name="agg3Request">
+                <input type="submit" class="btn btn-dark btn-lg" value="Go" name="agg3Request"></p>
+            </form>
+
         </div>
 
         <div id="pageEnd"></div>
@@ -306,11 +320,22 @@ gyms?</p>
         function handleUpdateRequest() {
             global $db_conn;
 
-            $old_name = $_POST['oldName'];
-            $new_name = $_POST['newName'];
+            global $db_conn;
 
-            // you need the wrap the old name and new name values with single quotations
-            executePlainSQL("UPDATE demoTable SET name='" . $new_name . "' WHERE name='" . $old_name . "'");
+            $tuple = array (
+                ":bind1" => $_POST['hotelId'],
+                ":bind2" => $_POST['suiteNo'],
+                ":bind3" => $_POST['isInUse']
+            );
+
+            $alltuples = array (
+                $tuple
+            );
+
+            $result = executeBoundSQL("UPDATE Suite SET IsInUse = (:bind3) WHERE SuiteNo = (:bind2) AND HotelId = (:bind1)", $alltuples);
+            
+            echo "IsInUse Updated for Suite.";
+            
             OCICommit($db_conn);
         }
 
@@ -319,79 +344,54 @@ gyms?</p>
             
             executePlainSQL("DROP TABLE TreatmentPricing");
             echo "Dropped TreatmentPricing Table <br>";
-            
             executePlainSQL("DROP TABLE RelaxesIn");
             echo "Dropped RelaxesIn Table <br>";
-
             executePlainSQL("DROP TABLE Spa");
             echo "Dropped Spa Table <br>";
-
             executePlainSQL("DROP TABLE WorksOutAt");
             echo "Dropped WorksOutAt Table <br>";
-
             executePlainSQL("DROP TABLE Gym");
             echo "Dropped Gym Table <br>";
-
             executePlainSQL("DROP TABLE SwimsAt");
             echo "Dropped SwimsAt Table <br>";
-
             executePlainSQL("DROP TABLE Pool");
             echo "Dropped Pool Table <br>";
-
             executePlainSQL("DROP TABLE MenuItemPrices");
             echo "Dropped MenuItemPrices Table <br>";
-
             executePlainSQL("DROP TABLE EatsAt");
             echo "Dropped EatsAt Table <br>";
-
             executePlainSQL("DROP TABLE Restaurant");
             echo "Dropped Restaurant Table <br>";
-
             executePlainSQL("DROP TABLE Assigns");
             echo "Dropped Assigns Table <br>";
-
             executePlainSQL("DROP TABLE OperatorGroup");
             echo "Dropped OperatorGroup Table <br>";
-
             executePlainSQL("DROP TABLE FacilityEmployee");
             echo "Dropped FacilityEmployee Table <br>";
-
             executePlainSQL("DROP TABLE Employee");
             echo "Dropped Employee Table <br>";
-
             executePlainSQL("DROP TABLE Watches");
             echo "Dropped Watches Table <br>";
-
             executePlainSQL("DROP TABLE Performance");
-            echo "Dropped Performance Table <br>";
-            
+            echo "Dropped Performance Table <br>";            
             executePlainSQL("DROP TABLE PerformanceGroup");
-            echo "Dropped PerformanceGroup Table <br>";
-            
+            echo "Dropped PerformanceGroup Table <br>";            
             executePlainSQL("DROP TABLE Hires");
             echo "Dropped Hires Table <br>";
-
             executePlainSQL("DROP TABLE PayrollGroup");
             echo "Dropped PayrollGroup Table <br>";
-
             executePlainSQL("DROP TABLE Business");
             echo "Dropped Business Table <br>";
-
             executePlainSQL("DROP TABLE Deluxe");
             echo "Dropped Deluxe Table <br>";
-
             executePlainSQL("DROP TABLE Standard");
             echo "Dropped Standard Table <br>";
-
             executePlainSQL("DROP TABLE Books");
             echo "Dropped Books Table <br>";
-
             executePlainSQL("DROP TABLE Suite");
             echo "Dropped Suite Table <br>";
-
             executePlainSQL("DROP TABLE Hotel");
             echo "Dropped Hotel Table <br>";
-
             executePlainSQL("DROP TABLE Guest");
             echo "Dropped Guest Table <br>";
 
@@ -457,23 +457,6 @@ gyms?</p>
             OCICommit($db_conn);
         }
 
-        function handleInsertRequest() {
-            global $db_conn;
-
-            //Getting the values from user and insert data into the table
-            $tuple = array (
-                ":bind1" => $_POST['insNo'],
-                ":bind2" => $_POST['insName']
-            );
-
-            $alltuples = array (
-                $tuple
-            );
-
-            executeBoundSQL("insert into demoTable values (:bind1, :bind2)", $alltuples);
-            OCICommit($db_conn);
-        }
-
         function handleCountRequest() {
             global $db_conn;
 
@@ -498,7 +481,166 @@ gyms?</p>
             }
 
             echo "</table>";
+            OCICommit(db_conn);
         }
+
+        function handleProjectionRequest() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT Name, Email, Phone FROM Guest");
+
+            echo "<br>Retrieved data from table Guest:<br>";
+            echo "<table>";
+            echo "<tr><th>Name</th><th>Email</th><th>Phone</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["Name"] . "</td><td>" . $row["Email"] . "</td><td>" . $row["Phone"] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+
+            OCICommit($db_conn);
+        }
+
+        function handleDivisionRequest() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT UserId, Name FROM Guest G WHERE NOT EXISTS( SELECT P.PID FROM Performance P Minus( SELECT W.PID FROM Watches W WHERE W.UserId = G.UserId))");
+
+            echo "<br>Retrieved data from table Guest:<br>";
+            echo "<table>";
+            echo "<tr><th>Id</th><th>Name</th><th>Email</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["ID"] . "</td><td>" . $row["Name"] . "</td><td>" . $row["Email"] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+
+            OCICommit($db_conn);
+        }
+
+        function handleJoinRequest() {
+            global $db_conn;
+
+            $guestId = $_GET['guestId'];
+
+            $result = executePlainSQL("SELECT W.HotelId, W.GymName, G.MaxCapacity FROM WorksOutAt W, Gym G WHERE W.GymName = G.GymName AND W.UserId = '. $guestId .'");
+
+            echo "<br>Retrieved data from table Guest:<br>";
+            echo "<table>";
+            echo "<tr><th>HotelId</th><th>GymName</th><th>MaxCapacity</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["GymName"] . "</td><td>" . $row["MaxCapacity"] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+
+            OCICommit($db_conn);
+        }
+
+        function handleInsertHotelRequest() {
+            global $db_conn;
+
+            $tuple = array (
+                ":bind1" => $_POST['hotelId'],
+                ":bind2" => $_POST['name'],
+                ":bind3" => $_POST['address'],
+                ":bind4" => $_POST['phone']
+            );
+
+            $alltuples = array (
+                $tuple
+            );
+
+            $result = executeBoundSQL("INSERT INTO Hotel (HotelId, Name, Address, Phone) values (:bind1, :bind2, :bind3, :bind4)", $alltuples);
+            
+            echo "Hotel Created.";
+            
+            OCICommit($db_conn);
+        }
+
+        function handleDeleteRequest() {
+            global $db_conn;
+
+            $tuple = array (
+                ":bind1" => $_POST['hotelId'],
+                ":bind2" => $_POST['poolName']
+            );
+
+            $alltuples = array (
+                $tuple
+            );
+
+            $result = executeBoundSQL("DELETE FROM Pool WHERE HotelId = (:bind1) AND PoolName = (:bind2)", $alltuples);
+            
+            echo "Deleted Pool.";
+            
+            OCICommit($db_conn);
+        }
+
+        function handleSelectRequest() {
+            global $db_conn;
+
+            $email = $_GET['guestEmail'];
+
+            $result = executeBoundSQL("SELECT Phone FROM Guest WHERE Email = " . $email);
+            
+            echo "<br>Retrieved data from table Guest:<br>";
+            echo "<table>";
+            echo "<tr><th>Phone</th><th>Email</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["Phone"] . "</td><td>" . $email . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+            
+            OCICommit($db_conn);
+        }
+
+        function handleAgg1Request() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT H.HotelId, G.GymName, Min(G.MaxCapacity) FROM Hotel H, Gym G GROUP BY H.HotelId, G.GymName");
+            
+            echo "<br>Retrieved data from table:<br>";
+            echo "<table>";
+            echo "<tr><th>HotelId</th><th>GymName</th><th>MinMaxCapacity</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["GymName"] . "</td><td>" . $row["MinMaxCapacity"] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+            
+            OCICommit($db_conn);
+        }
+
+
+        function handleAgg2Request() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT HotelId, Min(MaxCapacity) FROM Gym GROUP BY HotelId HAVING Min(MaxCapacity) > 20");
+            
+            echo "<br>Retrieved data from table:<br>";
+            echo "<table>";
+            echo "<tr><th>HotelId</th><th>MinMaxCapacity</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["MinMaxCapacity"] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+            
+            OCICommit($db_conn);
+        }
+
+        function handleAgg3Request() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT H.HotelId, H.Name, H.Phone FROM Hotel H GROUP BY H.HotelId, H.Name, H.Phone HAVING 50 > (SELECT AVG(B.Price) FROM Books B WHERE H.HotelId = B.HotelId)");
+            
+            echo "<br>Retrieved data from table:<br>";
+            echo "<table>";
+            echo "<tr><th>HotelId</th><th>HotelName</th><th>Phone</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["HotelName"] . "</td><td>" . $row["Phone"] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+            
+            OCICommit($db_conn);
+        }
+
 
         // HANDLE ALL POST ROUTES
 	// A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
@@ -510,8 +652,10 @@ gyms?</p>
                     handleDropRequest();
                 } else if (array_key_exists('updateQueryRequest', $_POST)) {
                     handleUpdateRequest();
-                } else if (array_key_exists('insertQueryRequest', $_POST)) {
-                    handleInsertRequest();
+                } else if (array_key_exists('insertRequest', $_POST)) {
+                    handleInsertHotelRequest();
+                } else if (array_key_exists('deleteQueryRequest', $_POST)) {
+                    handleDeleteRequest();
                 }
 
                 disconnectFromDB();
@@ -524,19 +668,31 @@ gyms?</p>
             if (connectToDB()) {
                 if (array_key_exists('countTuples', $_GET)) {
                     handleCountRequest();
-                }
-
-                if (array_key_exists('displayOutput', $_GET)) {
+                } else if (array_key_exists('displayOutput', $_GET)) {
                     handleDisplayOutputReq();
+                } else if (array_key_exists('projectionRequest', $_GET)) {
+                    handleProjectionRequest();
+                } else if (array_key_exists('divisionRequest', $_GET)) {
+                    handleDivisionRequest();
+                } else if (array_key_exists('joinRequest', $_GET)) {
+                    handleJoinRequest();
+                } else if (array_key_exists('selectRequest', $_GET)) {
+                    handleSelectRequest();
+                } else if (array_key_exists('agg1Request', $_GET)) {
+                    handleAgg1Request();
+                } else if (array_key_exists('agg2Request', $_GET)) {
+                    handleAgg2Request();
+                } else if (array_key_exists('agg3Request', $_GET)) {
+                    handleAgg3Request();
                 }
 
                 disconnectFromDB();
             }
         }
 
-		if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])) {
+        if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['insertRequest']) || isset($_POST['updateQueryRequest']) || isset($_POST['deleteQueryRequest'])) {
             handlePOSTRequest();
-        } else if (isset($_GET['countTupleRequest']) || isset($_GET['displayOutputRequest'])) {
+        } else if (isset($_GET['countTupleRequest']) || isset($_GET['displayOutputRequest']) || isset($_GET['projectionRequest']) || isset($_GET['divisionRequest']) || isset($_GET['joinRequest']) || isset($_GET['selectRequest']) || isset($_GET['agg1Request']) || isset($_GET['agg2Request']) || isset($_GET['agg3Request'])) {
             handleGETRequest();
         }
 		?>
