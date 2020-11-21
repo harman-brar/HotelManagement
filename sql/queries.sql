@@ -38,7 +38,7 @@ GROUP BY H.HotelId, H.Name;
 
 /* Aggregation with Having */
 SELECT HotelId, Min(MaxCapacity)
-FROM GYM
+FROM Gym
 GROUP BY HotelId
 HAVING Min(MaxCapacity) > 20;
 
