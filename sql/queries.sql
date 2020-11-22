@@ -21,7 +21,7 @@ FROM WorksOutAt W, Gym G
 WHERE W.GymName = G.GymName AND W.UserId = X;
 
 /* DIVISION */
-SELECT UserId, Name
+SELECT G.UserId, G.Name
 FROM Guest G
 WHERE NOT EXISTS(
                 SELECT P.PID
@@ -31,7 +31,7 @@ WHERE NOT EXISTS(
                                         WHERE W.UserId = G.UserId))
 
 /* Aggregation with Group By */
-SELECT H.HotelId, G.GymName, Min(G.MaxCapacity)
+SELECT H.HotelId, G.GymName
 FROM Hotel H, Gym G
 GROUP BY H.HotelId, G.GymName;
 
@@ -45,7 +45,7 @@ HAVING Min(MaxCapacity) > 20;
 SELECT H.HotelId, H.Name, H.Phone
 FROM Hotel H
 GROUP BY H.HotelId, H.Name, H.Phone
-HAVING 50 > (SELECT AVG(B.Price)
+HAVING 200 >= (SELECT AVG(B.Price)
             FROM Books B
             WHERE H.HotelId = B.HotelId);
  

@@ -51,7 +51,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <a href="https://docs.google.com/document/d/10eI8MnIRRizElAkLevzY1MwmJLShgYybtpjP54nmu6o/edit?usp=sharing">Reference Document</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -142,10 +142,10 @@
             <hr />
 
             <h2>Selection Query</h2>
-            <p>What is the phone # of the guest with email?</p>
+            <p>What is the email of the guest with phone #</p>
             <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="selectRequest" name="selectRequest">
-                Email: <input type="text" name="guestEmail"> <br /><br />
+                phoneNo: <input type="text" name="guestEmail"> <br /><br />
 
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="selectRequest"></p>
             </form>
@@ -193,7 +193,7 @@ gyms?</p>
             <hr />
 
             <h2>Nested Aggregation</h2>
-            <p>Group by HotelId, GymName</p>
+            <p>Get the names, phone numbers, and ids of hotels with an average booking price less than 200.</p>
             <form method="GET" action="hotel.php#pageEnd"> <!--refresh page when submitted-->
                 <input type="hidden" id="agg3Request" name="agg3Request">
                 <input type="submit" class="btn btn-dark btn-lg" value="Go" name="agg3Request"></p>
@@ -463,6 +463,11 @@ gyms?</p>
             executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (2, 'Muaz Abrar', 'ma@g.com', 7780010001)");
             executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (3, 'Michael Jackson', 'mj@g.com', 7780010002)");
             executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (4, 'Larry', 'larry@dairy.com', 7780010003)");
+            executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (5, 'John Doe', 'jd@g.com', 7780010011)");
+            executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (6, 'John Snow', 'js@g.com', 7781012912)");
+            executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (7, 'Harry Wizard', 'hw@g.com', 7780010013)");
+            executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (8, 'Ed Knorr', 'ek@g.com', 7780010014)");
+            executePlainSQL("INSERT INTO Guest(UserId, Name, Email, Phone) VALUES (9, 'Parry', 'parry@dairy.com', 7780010015)");
 
             echo "Mock data for Hotel table <br>";
             executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (0, 'Marriot', '1234 A St.', 7781110000)");
@@ -470,6 +475,14 @@ gyms?</p>
             executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (2, 'Days Inn', '1234 C St.', 7781110002)");
             executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (3, 'Hilton', '1234 D St.', 7781110003)");
             executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (4, 'Ramada', '1234 E St.', 7781110004)");
+
+            executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (5, 'Holiday Inn', '1234 F St.', 7781110011)");
+            executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (6, 'Canadian Inn', '1234 G St.', 7781110012)");
+            executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (7, 'American Inn', '1234 H St.', 7781110013)");
+            executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (8, 'Vancouver Inn', '1234 I St.', 7781110014)");
+            executePlainSQL("INSERT INTO Hotel(HotelId, Name, Address, Phone) VALUES (9, 'Toronto Inn', '1234 J St.', 7781110015)");
+
+
 
             echo "Mock data for Suite table <br>";
             executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (1, 1, 0, 2, 1)");
@@ -488,17 +501,72 @@ gyms?</p>
             executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (2, 4, 1, 1, 0)");
             executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (4, 67, 0, 2, 1)");
 
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (5, 1, 0, 2, 1)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (5, 2, 0, 2, 1)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (8, 1, 0, 2, 1)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (6, 5, 0, 2, 1)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (7, 91, 0, 2, 1)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (5, 99, 0, 1, 1)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (6, 1, 0, 3, 1)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (5, 98, 1, 2, 0)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (7, 1, 1, 2, 0)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (5, 97, 1, 1, 0)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (8, 2, 1, 1, 0)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (6, 2, 1, 2, 0)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (6, 3, 1, 1, 0)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (6, 4, 1, 1, 0)");
+            executePlainSQL("INSERT INTO Suite(HotelId, SuiteNo, IsInUse, BedCount, IsClean) VALUES (8, 67, 0, 2, 1)");
+
             echo "Mock data for Books table <br>";
-            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (0, 1, 1, TO_DATE('2020-10-18', 
-'YYYY-MM-DD'), 3, 110)");
-            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (1, 1, 2, TO_DATE('2020-10-19', 
-'YYYY-MM-DD'), 1, 130)");
-            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (2, 4, 1, TO_DATE('2020-10-20', 
-'YYYY-MM-DD'), 2, 120)");
-            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (3, 2, 5, TO_DATE('2020-10-21', 
-'YYYY-MM-DD'), 3, 110)");
-            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (4, 3, 91, TO_DATE('2020-11-10', 
-'YYYY-MM-DD'), 7, 600)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (0, 1, 1, TO_DATE('2020-10-18', 'YYYY-MM-DD'), 3, 110)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (1, 1, 2, TO_DATE('2020-10-19', 'YYYY-MM-DD'), 1, 130)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (2, 4, 1, TO_DATE('2020-10-20', 'YYYY-MM-DD'), 2, 120)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (3, 2, 5, TO_DATE('2020-10-21', 'YYYY-MM-DD'), 3, 110)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (4, 3, 91, TO_DATE('2020-11-10', 'YYYY-MM-DD'), 7, 600)");
+
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (5, 1, 1, TO_DATE('2019-10-18', 'YYYY-MM-DD'), 13, 56)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (6, 1, 2, TO_DATE('2019-10-19', 'YYYY-MM-DD'), 10, 40)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (7, 4, 1, TO_DATE('2019-10-20', 'YYYY-MM-DD'), 21, 200)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (8, 2, 5, TO_DATE('2019-10-21', 'YYYY-MM-DD'), 32, 30)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (9, 3, 91, TO_DATE('2019-11-10', 'YYYY-MM-DD'), 17, 200)");
+
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (9, 1, 1, TO_DATE('2018-10-18', 'YYYY-MM-DD'), 3, 1002)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (8, 1, 2, TO_DATE('2018-10-19', 'YYYY-MM-DD'), 1, 400)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (6, 4, 1, TO_DATE('2018-10-20', 'YYYY-MM-DD'), 2, 45)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (7, 2, 5, TO_DATE('2018-10-21', 'YYYY-MM-DD'), 3, 15)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (5, 3, 91, TO_DATE('2018-11-10', 'YYYY-MM-DD'), 7, 60)");
+
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (4, 1, 1, TO_DATE('2017-10-18', 'YYYY-MM-DD'), 13, 156)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (3, 1, 2, TO_DATE('2017-10-19', 'YYYY-MM-DD'), 10, 36)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (1, 4, 1, TO_DATE('2017-10-20', 'YYYY-MM-DD'), 21, 300)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (2, 2, 5, TO_DATE('2017-10-21', 'YYYY-MM-DD'), 32, 560)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (0, 3, 91, TO_DATE('2017-11-10', 'YYYY-MM-DD'), 17, 900)");
+
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (0, 5, 1, TO_DATE('2016-10-18', 'YYYY-MM-DD'), 3, 110)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (1, 5, 2, TO_DATE('2016-10-19', 'YYYY-MM-DD'), 1, 130)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (2, 8, 1, TO_DATE('2016-10-20', 'YYYY-MM-DD'), 2, 120)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (3, 6, 5, TO_DATE('2016-10-21', 'YYYY-MM-DD'), 3, 110)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (4, 7, 91, TO_DATE('2016-11-10', 'YYYY-MM-DD'), 7, 600)");
+
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (5, 5, 1, TO_DATE('2015-10-18', 'YYYY-MM-DD'), 13, 56)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (6, 5, 2, TO_DATE('2015-10-19', 'YYYY-MM-DD'), 10, 40)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (7, 8, 1, TO_DATE('2015-10-20', 'YYYY-MM-DD'), 21, 200)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (8, 6, 5, TO_DATE('2015-10-21', 'YYYY-MM-DD'), 32, 30)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (9, 7, 91, TO_DATE('2015-11-10', 'YYYY-MM-DD'), 17, 200)");
+
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (9, 5, 1, TO_DATE('2014-10-18', 'YYYY-MM-DD'), 3, 1002)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (7, 5, 2, TO_DATE('2014-10-19', 'YYYY-MM-DD'), 1, 400)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (8, 8, 1, TO_DATE('2014-10-20', 'YYYY-MM-DD'), 2, 45)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (6, 6, 5, TO_DATE('2014-10-21', 'YYYY-MM-DD'), 3, 15)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (5, 7, 91, TO_DATE('2014-11-10', 'YYYY-MM-DD'), 7, 60)");
+
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (4, 5, 1, TO_DATE('2013-10-18', 'YYYY-MM-DD'), 13, 156)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (3, 5, 2, TO_DATE('2013-10-19', 'YYYY-MM-DD'), 10, 36)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (1, 8, 1, TO_DATE('2013-10-20', 'YYYY-MM-DD'), 21, 300)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (2, 6, 5, TO_DATE('2013-10-21', 'YYYY-MM-DD'), 32, 560)");
+            executePlainSQL("INSERT INTO Books(UserId, HotelId, SuiteNo, BookingDate, StayLength, Price) VALUES (0, 7, 91, TO_DATE('2013-11-10', 'YYYY-MM-DD'), 17, 900)");
+
+
 
             echo "Mock data for Standard table <br>";
             executePlainSQL("INSERT INTO Standard(HotelId, SuiteNo, HasSofaBed) VALUES (1, 1, 0)");
@@ -545,21 +613,52 @@ gyms?</p>
             executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (3,0)");
             executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (4,0)");
 
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (0,1)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (1,1)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (2,1)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (3,1)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (4,1)");
+
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (0,2)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (1,2)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (2,2)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (3,2)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (4,2)");
+
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (0,3)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (1,3)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (2,3)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (3,3)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (4,3)");
+
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (0,4)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (1,4)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (2,4)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (3,4)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (4,4)");
+
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (0,5)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (1,5)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (2,5)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (3,5)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (4,5)");
+
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (0,6)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (1,6)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (2,6)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (3,6)");
+            executePlainSQL("INSERT INTO Hires(HotelId, PGID) VALUES (4,6)");
+
             echo "Mock data for PerformanceGroup table <br>";
-            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (5, TO_DATE('2017-09-01', 
-'YYYY-MM-DD'), TO_DATE('2018-09-05',
+            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (5, TO_DATE('2017-09-01', 'YYYY-MM-DD'), TO_DATE('2018-09-05',
             'YYYY-MM-DD'), 1200)");
-            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (6, TO_DATE('2018-12-23', 
-'YYYY-MM-DD'), TO_DATE('2019-12-26',
+            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (6, TO_DATE('2018-12-23', 'YYYY-MM-DD'), TO_DATE('2019-12-26',
             'YYYY-MM-DD'), 3000)");
-            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (7, TO_DATE('2019-07-07', 
-'YYYY-MM-DD'), TO_DATE('2019-07-09',
+            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (7, TO_DATE('2019-07-07', 'YYYY-MM-DD'), TO_DATE('2019-07-09',
             'YYYY-MM-DD'), 4500)");
-            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (8, TO_DATE('2020-04-22', 
-'YYYY-MM-DD'), TO_DATE('2020-04-23',
+            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (8, TO_DATE('2020-04-22', 'YYYY-MM-DD'), TO_DATE('2020-04-23',
             'YYYY-MM-DD'), 8989)");
-            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (9, TO_DATE('2020-10-25', 
-'YYYY-MM-DD'), TO_DATE('2020-10-23',
+            executePlainSQL("INSERT INTO PerformanceGroup(PGID, ContractStartDate, ContractEndDate, ChargeRate) VALUES (9, TO_DATE('2020-10-25', 'YYYY-MM-DD'), TO_DATE('2020-10-23',
             'YYYY-MM-DD'), 2200)");
 
             echo "Mock data for Performance table <br>";
@@ -571,26 +670,52 @@ gyms?</p>
 
             echo "Mock data for Watches table <br>";
             executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (0, 0)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (0, 1)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (0, 2)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (0, 3)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (0, 4)");
             executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (1, 1)");
             executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (2, 2)");
             executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (3, 3)");
             executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (2, 4)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (2, 0)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (2, 1)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (2, 3)");
+
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (4, 0)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (4, 1)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (4, 2)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (4, 3)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (4, 4)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (5, 1)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (6, 2)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (7, 3)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (6, 4)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (6, 0)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (6, 1)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (6, 3)");
+
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (8, 0)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (8, 1)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (8, 2)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (8, 3)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (8, 4)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (9, 2)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (9, 4)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (9, 0)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (9, 1)");
+            executePlainSQL("INSERT INTO Watches(UserId, PID) VALUES (9, 3)");
 
             echo "Mock data for Employee table <br>";
-            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (1, 
-TO_DATE('2019-09-05', 'YYYY-MM-DD'), 3000,
+            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (1, TO_DATE('2019-09-05', 'YYYY-MM-DD'), 3000,
             'Cook', 0, TO_DATE('2020-09-05', 'YYYY-MM-DD'))");
-            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (2, 
-TO_DATE('2019-08-26', 'YYYY-MM-DD'), 4000,
+            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (2, TO_DATE('2019-08-26', 'YYYY-MM-DD'), 4000,
             'Janitor', 1, TO_DATE('2021-09-05', 'YYYY-MM-DD'))");
-            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (3, 
-TO_DATE('2019-10-30', 'YYYY-MM-DD'), 3300,
+            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (3, TO_DATE('2019-10-30', 'YYYY-MM-DD'), 3300,
             'Plumber', 1, TO_DATE('2021-09-05', 'YYYY-MM-DD'))");
-            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (4, 
-TO_DATE('2019-01-06', 'YYYY-MM-DD'), 3500,
+            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (4, TO_DATE('2019-01-06', 'YYYY-MM-DD'), 3500,
             'Receptionist', 1, TO_DATE('2021-09-05', 'YYYY-MM-DD'))");
-            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (5, 
-TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
+            executePlainSQL("INSERT INTO Employee(PGID, StartDate, Salary, JobDescription, isCurrentlyEmployed, EndDate) VALUES (5, TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
             'HouseKeeper', 1, TO_DATE('2021-09-05', 'YYYY-MM-DD'))");
 
             echo "Mock data for FacilityEmployee table <br>";
@@ -606,6 +731,24 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
             executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (3, 5)");
             executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (4, 3)");
             executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (5, 12)");
+
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (6, 10)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (7, 7)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (8, 5)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (9, 3)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (10, 12)");
+
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (11, 10)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (12, 7)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (13, 5)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (14, 3)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (15, 12)");
+
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (16, 10)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (17, 7)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (18, 5)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (19, 3)");
+            executePlainSQL("INSERT INTO OperatorGroup(GroupId, MemberCount) VALUES (29, 12)");
 
             echo "Mock data for Assigns table <br>";
             executePlainSQL("INSERT INTO Assigns(GroupId, PGID, AssignmentDate) VALUES (1, 3, TO_DATE('2019-09-05', 'YYYY-MM-DD'))");
@@ -656,12 +799,46 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
             executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (3, 'Muazs Gym', 4, 36)");
             executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (4, 'Jerrys Gym', 5, 55)");
 
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (5, 'Sahils Gym', 6, 50)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (6, 'Johns Gym', 7, 40)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (7, 'Harmans Gym', 8, 45)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (8, 'Muazs Gym', 9, 36)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (9, 'Jerrys Gym', 10, 55)");
+
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (0, 'Gold Gym', 11, 50)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (1, 'Anytime Gym', 12, 40)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (2, 'Goodlife Gym', 13, 45)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (3, 'Planet Gym', 14, 36)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (4, 'Club99 Gym', 15, 55)");
+
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (5, 'Gold Gym', 16, 50)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (6, 'Anytime Gym', 17, 40)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (7, 'Goodlife Gym', 18, 45)");
+            executePlainSQL("INSERT INTO Gym(HotelId, GymName, GroupId, MaxCapacity) VALUES (8, 'Planet Gym', 19, 36)");
+
             echo "Mock data for WorksOutAt table <br>";
             executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (0, 0, 'Sahils Gym')");
             executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (1, 1, 'Johns Gym')");
             executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (2, 2, 'Harmans Gym')");
             executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (3, 3, 'Muazs Gym')");
             executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (4, 4, 'Jerrys Gym')");
+
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (0, 5, 'Sahils Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (1, 6, 'Johns Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (2, 7, 'Harmans Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (3, 8, 'Muazs Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (4, 9, 'Jerrys Gym')");
+
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (0, 0, 'Gold Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (1, 1, 'Anytime Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (2, 2, 'Goodlife Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (3, 3, 'Planet Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (4, 4, 'Club99 Gym')");
+
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (0, 5, 'Gold Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (1, 6, 'Anytime Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (2, 7, 'Goodlife Gym')");
+            executePlainSQL("INSERT INTO WorksOutAt(UserId, HotelId, GymName) VALUES (3, 8, 'Planet Gym')");
 
             echo "Mock data for Spa table <br>";
             executePlainSQL("INSERT INTO Spa(HotelId, SpaName, GroupId, MaxCapacity) VALUES (0, 'Sahils Spa', 1, 50)");
@@ -686,7 +863,7 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
 
             OCICommit($db_conn);
         }
-
+        
         function handleCountRequest() {
             global $db_conn;
 
@@ -711,7 +888,7 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
             }
 
             echo "</table>";
-            OCICommit(db_conn);
+            OCICommit($db_conn);
         }
 
         function handleProjectionRequest() {
@@ -724,8 +901,10 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
             echo "<tr><th>Name</th><th>Email</th><th>Phone</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["Name"] . "</td><td>" . $row["Email"] . "</td><td>" . $row["Phone"] . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row["NAME"] . "</td><td>" . $row["EMAIL"] . "</td><td>" . $row["PHONE"] . "</td></tr>"; //or just use "echo $row[0]" 
             }
+
+            echo "</table>";
 
             OCICommit($db_conn);
         }
@@ -733,15 +912,17 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
         function handleDivisionRequest() {
             global $db_conn;
 
-            $result = executePlainSQL("SELECT UserId, Name FROM Guest G WHERE NOT EXISTS( SELECT P.PID FROM Performance P Minus( SELECT W.PID FROM Watches W WHERE W.UserId = G.UserId))");
+            $result = executePlainSQL("SELECT G.UserId, G.Name FROM Guest G WHERE NOT EXISTS( SELECT P.PID FROM Performance P Minus( SELECT W.PID FROM Watches W WHERE W.UserId = G.UserId))");
 
-            echo "<br>Retrieved data from table Guest:<br>";
+            echo "<br>Retrieved data from table:<br>";
             echo "<table>";
-            echo "<tr><th>Id</th><th>Name</th><th>Email</th></tr>";
+            echo "<tr><th>UserId</th><th>Name</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["ID"] . "</td><td>" . $row["Name"] . "</td><td>" . $row["Email"] . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row["USERID"] . "</td><td>" . $row["NAME"] . "</td></tr>"; //or just use "echo $row[0]" 
             }
+
+            echo "</table>";
 
             OCICommit($db_conn);
         }
@@ -751,15 +932,18 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
 
             $guestId = $_GET['guestId'];
 
-            $result = executePlainSQL("SELECT W.HotelId, W.GymName, G.MaxCapacity FROM WorksOutAt W, Gym G WHERE W.GymName = G.GymName AND W.UserId = '. $guestId .'");
+            $request = "SELECT W.HotelId, W.GymName, G.MaxCapacity FROM WorksOutAt W, Gym G WHERE W.GymName = G.GymName AND W.UserId =" . $guestId;
 
-            echo "<br>Retrieved data from table Guest:<br>";
+            $result = executePlainSQL($request);
+
+            echo "<br>Retrieved data from table:<br>";
             echo "<table>";
             echo "<tr><th>HotelId</th><th>GymName</th><th>MaxCapacity</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["GymName"] . "</td><td>" . $row["MaxCapacity"] . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row["HOTELID"] . "</td><td>" . $row["GYMNAME"] . "</td><td>" . $row["MAXCAPACITY"] . "</td></tr>"; //or just use "echo $row[0]" 
             }
+            echo "</table>";
 
             OCICommit($db_conn);
         }
@@ -807,17 +991,18 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
         function handleSelectRequest() {
             global $db_conn;
 
-            $email = $_GET['guestEmail'];
+            $request = "SELECT Email FROM Guest WHERE Phone ='". $_GET['guestEmail'] . "'";
 
-            $result = executeBoundSQL("SELECT Phone FROM Guest WHERE Email = " . $email);
+            $result = executePlainSQL($request);
             
             echo "<br>Retrieved data from table Guest:<br>";
             echo "<table>";
-            echo "<tr><th>Phone</th><th>Email</th></tr>";
+            echo "<tr><th>Email</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["Phone"] . "</td><td>" . $email . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row["EMAIL"] . "</td></tr>"; //or just use "echo $row[0]" 
             }
+            echo "</table>";
             
             OCICommit($db_conn);
         }
@@ -825,15 +1010,16 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
         function handleAgg1Request() {
             global $db_conn;
 
-            $result = executePlainSQL("SELECT H.HotelId, G.GymName, Min(G.MaxCapacity) FROM Hotel H, Gym G GROUP BY H.HotelId, G.GymName");
+            $result = executePlainSQL("SELECT H.HotelId, G.GymName FROM Hotel H, Gym G GROUP BY H.HotelId, G.GymName");
             
             echo "<br>Retrieved data from table:<br>";
             echo "<table>";
-            echo "<tr><th>HotelId</th><th>GymName</th><th>MinMaxCapacity</th></tr>";
+            echo "<tr><th>HotelId</th><th>GymName</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["GymName"] . "</td><td>" . $row["MinMaxCapacity"] . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row["HOTELID"] . "</td><td>" . $row["GYMNAME"] . "</td></tr>"; //or just use "echo $row[0]" 
             }
+            echo "</table>";
             
             OCICommit($db_conn);
         }
@@ -849,8 +1035,9 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
             echo "<tr><th>HotelId</th><th>MinMaxCapacity</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["MinMaxCapacity"] . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row["HOTELID"] . "</td><td>" . $row["MIN(MAXCAPACITY)"] . "</td></tr>"; //or just use "echo $row[0]" 
             }
+            echo "</table>";
             
             OCICommit($db_conn);
         }
@@ -858,15 +1045,16 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
         function handleAgg3Request() {
             global $db_conn;
 
-            $result = executePlainSQL("SELECT H.HotelId, H.Name, H.Phone FROM Hotel H GROUP BY H.HotelId, H.Name, H.Phone HAVING 50 > (SELECT AVG(B.Price) FROM Books B WHERE H.HotelId = B.HotelId)");
+            $result = executePlainSQL("SELECT H.HotelId, H.Name, H.Phone FROM Hotel H GROUP BY H.HotelId, H.Name, H.Phone HAVING 200 >= (SELECT AVG(B.Price) FROM Books B WHERE H.HotelId = B.HotelId)");
             
             echo "<br>Retrieved data from table:<br>";
             echo "<table>";
             echo "<tr><th>HotelId</th><th>HotelName</th><th>Phone</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["HotelId"] . "</td><td>" . $row["HotelName"] . "</td><td>" . $row["Phone"] . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row["HOTELID"] . "</td><td>" . $row["NAME"] . "</td><td>" . $row["PHONE"] . "</td></tr>"; //or just use "echo $row[0]" 
             }
+            echo "</table>";
             
             OCICommit($db_conn);
         }
@@ -922,8 +1110,7 @@ TO_DATE('2019-04-05', 'YYYY-MM-DD'), 3200,
             }
         }
 
-        if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['insertRequest']) || 
-isset($_POST['updateQueryRequest']) || isset($_POST['deleteQueryRequest'] || isset($_POST['insertQueryRequest']))) {
+        if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['insertRequest']) || isset($_POST['updateQueryRequest']) || isset($_POST['deleteQueryRequest']) || isset($_POST['insertQueryRequest'])) {
             handlePOSTRequest();
         } else if (isset($_GET['countTupleRequest']) || isset($_GET['displayOutputRequest']) || isset($_GET['projectionRequest']) || isset($_GET['divisionRequest']) || isset($_GET['joinRequest']) || isset($_GET['selectRequest']) || isset($_GET['agg1Request']) || isset($_GET['agg2Request']) || isset($_GET['agg3Request'])) {
             handleGETRequest();
