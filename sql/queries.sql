@@ -13,7 +13,7 @@ DELETE FROM Pool WHERE HotelId = X AND PoolName = Y;
 SELECT Name, Email, Phone FROM Guest;
 
 /* SELECTION */
-SELECT Phone FROM Guest WHERE Email = X;
+SELECT Email FROM Guest WHERE Phone = X;
 
 /* JOIN */
 SELECT W.HotelId, W.GymName, G.MaxCapacity 
