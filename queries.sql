@@ -16,7 +16,7 @@ SELECT Name, Email, Phone FROM Guest;
 SELECT Email FROM Guest WHERE Phone = X;
 
 /* JOIN */
-SELECT DISTINCT W.HotelId, W.GymName, G.MaxCapacity 
+SELECT W.HotelId, W.GymName, G.MaxCapacity 
 FROM WorksOutAt W, Gym G
 WHERE W.GymName = G.GymName AND W.UserId = X;
 
@@ -39,7 +39,7 @@ GROUP BY H.HotelId, G.GymName;
 SELECT HotelId, Min(MaxCapacity)
 FROM Gym
 GROUP BY HotelId
-HAVING Min(MaxCapacity) > 40;
+HAVING Min(MaxCapacity) > 20;
 
 /* Nested Aggregation with Group By */
 SELECT H.HotelId, H.Name, H.Phone

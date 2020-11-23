@@ -932,7 +932,7 @@ gyms?</p>
 
             $guestId = $_GET['guestId'];
 
-            $request = "SELECT W.HotelId, W.GymName, G.MaxCapacity FROM WorksOutAt W, Gym G WHERE W.GymName = G.GymName AND W.UserId =" . $guestId;
+            $request = "SELECT DISTINCT W.HotelId, W.GymName, G.MaxCapacity FROM WorksOutAt W, Gym G WHERE W.GymName = G.GymName AND W.UserId =" . $guestId;
 
             $result = executePlainSQL($request);
 
